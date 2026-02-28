@@ -31,6 +31,11 @@ Layer 1 Tech Stack
 ├── Auth
 │   └── NextAuth.js v5        ← JWT sessions
 │
+├── Database
+│   ├── PostgreSQL 16         ← قاعدة البيانات الرئيسية
+│   ├── Drizzle ORM           ← type-safe SQL (TypeScript-first)
+│   └── postgres.js           ← driver للاتصال المباشر
+│
 ├── Forms
 │   ├── React Hook Form       ← إدارة الفورم
 │   └── Zod                   ← validation
@@ -120,10 +125,50 @@ apps/web/                       ← (داخل monorepo)
 | Bundle size (initial) | < 200KB gzipped |
 | Lighthouse Score | > 90 |
 
+## البنية التحتية (Infrastructure)
+
+**المزود:** DigitalOcean
+
+| الطبقة | التفاصيل |
+|--------|---------|
+| **Hosting** | DigitalOcean Droplet |
+| **IP (Dev/Staging)** | `45.55.253.17` |
+| **قاعدة البيانات** | PostgreSQL 16 (على نفس الـ Droplet أو DigitalOcean Managed DB) |
+| **Web Server** | Nginx (reverse proxy → Next.js on port 3000) |
+| **Process Manager** | PM2 (يُشغّل `next start`) |
+| **SSL** | Let's Encrypt عبر Certbot |
+
+### لماذا DigitalOcean وليس Vercel؟
+- تحكم كامل في الـ environment
+- PostgreSQL على نفس الشبكة (latency منخفض)
+- تكلفة ثابتة ومتوقعة مع نمو الفريق
+
 ## البيئات
 
 ```
 local     → http://localhost:3000
-staging   → https://staging.openclaw.ai
+staging   → http://45.55.253.17 (DigitalOcean Droplet)
 production → https://openclaw.ai (أو app.openclaw.ai)
+```
+
+## متغيرات البيئة المطلوبة (.env)
+
+```env
+# App
+NEXTAUTH_URL=https://openclaw.ai
+NEXTAUTH_SECRET=<generated>
+
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/openclaw_db
+
+# Core API (Layer 2)
+CORE_API_URL=http://localhost:4000
+
+# Email
+RESEND_API_KEY=<key>
+
+# Stripe
+STRIPE_SECRET_KEY=<key>
+STRIPE_WEBHOOK_SECRET=<key>
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=<key>
 ```

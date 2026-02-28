@@ -116,6 +116,25 @@
 
 ---
 
+### S0-T-008 | إعداد PostgreSQL + Drizzle ORM
+**المسؤول:** Backend Dev
+**الوقت التقديري:** 3 ساعات
+
+- [ ] تثبيت `drizzle-orm`, `drizzle-kit`, `postgres` (driver)
+- [ ] إنشاء `lib/db.ts` — اتصال الـ DB عبر `postgres.js`
+- [ ] إنشاء `db/schema.ts` — تعريف الجداول الأولية:
+  - `users` (id, email, password_hash, role, created_at)
+  - `sessions` (اختياري إذا استخدمنا DB sessions مع NextAuth)
+- [ ] إعداد `drizzle.config.ts` للـ migrations
+- [ ] تشغيل أول migration: `bunx drizzle-kit migrate`
+- [ ] إضافة `DATABASE_URL` لـ `.env.example`
+- [ ] التحقق من الاتصال بـ PostgreSQL على `45.55.253.17` في البيئة المحلية
+
+**التبعيات:** S0-T-001
+**الناتج:** قاعدة بيانات جاهزة + schema مُعرَّف + ORM يعمل
+
+---
+
 ### S0-T-007 | إعداد Vitest + أول اختبار
 **المسؤول:** أي مطور
 **الوقت التقديري:** 2 ساعة
@@ -150,4 +169,5 @@
 | S0-T-005 | 1 |
 | S0-T-006 | 3 |
 | S0-T-007 | 1 |
-| **المجموع** | **15** |
+| S0-T-008 (DB) | 2 |
+| **المجموع** | **17** |

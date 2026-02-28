@@ -64,12 +64,15 @@ TypeScript                  ← اللغة
 Tailwind CSS v4             ← التصميم
 shadcn/ui                   ← مكونات UI
 NextAuth.js v5              ← Auth
+PostgreSQL 16               ← قاعدة البيانات ✅ مُحدَّد
+Drizzle ORM                 ← Database ORM (TypeScript-first)
 Zustand                     ← Global State
 TanStack Query v5           ← Server State
 Zod + React Hook Form       ← Forms
 Recharts                    ← Charts (Admin)
 Stripe                      ← Billing
 Vitest + Playwright         ← Testing
+DigitalOcean                ← Hosting ✅ مُحدَّد (45.55.253.17)
 ```
 
 ---
@@ -100,7 +103,7 @@ Vitest + Playwright         ← Testing
 | Core API (Layer 2) | S2+ | يجب أن تكون endpoints Instance جاهزة |
 | Stripe Account | S3 | لـ Billing integration |
 | Email Service (Resend/SES) | S1 | لـ verification emails |
-| Hosting (Vercel/Railway) | S0 | للـ preview environments |
+| Hosting (DigitalOcean) | S0 | Droplet جاهز: `45.55.253.17` ✅ |
 
 ---
 
